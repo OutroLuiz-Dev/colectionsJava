@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula: Coleções em Java</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3, h4 {
+            color: #333;
+        }
+        .code {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: "Courier New", Courier, monospace;
+        }
+        .question {
+            margin-top: 20px;
+        }
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Aula: Coleções em Java</h1>
+
+<h2>Introdução</h2>
+<p>
+As coleções em Java são fundamentais para a linguagem, oferecendo estruturas de dados dinâmicas para armazenar e manipular conjuntos de objetos de forma eficiente. Elas simplificam a gestão de elementos e facilitam operações como adição, remoção e busca. A biblioteca Java fornece várias interfaces de coleções, como List, Set e Map, permitindo aos desenvolvedores escolher a estrutura mais adequada para suas necessidades específicas. Compreender as coleções é essencial para codificar programas orientados a objetos e aplicar técnicas de orientação a objetos, contribuindo para a eficiência e a reutilização de código.
+</p>
+
+<h2>Tipos de Coleções</h2>
+<h3>Interfaces Principais</h3>
+<ul>
+    <li><strong>List</strong>: Representa uma coleção ordenada que pode conter elementos duplicados. Implementações comuns incluem ArrayList e LinkedList.</li>
+    <li><strong>Set</strong>: Representa uma coleção de elementos únicos, sem duplicatas. Implementações comuns incluem HashSet e TreeSet.</li>
+    <li><strong>Map</strong>: Armazena pares chave-valor, onde cada chave é única. Implementações comuns incluem HashMap e TreeMap.</li>
+</ul>
+
+<h3>ArrayList e LinkedList</h3>
+<p>
+O ArrayList e o LinkedList são implementações da interface List, com características distintas:
+</p>
+<ul>
+    <li><strong>ArrayList</strong>: Baseado em um array dinâmico, permite acesso rápido aos elementos (O(1) para acesso por índice), mas pode ser lento em inserções e remoções no meio da lista (O(n)), pois pode necessitar de realocação de elementos.</li>
+    <pre class="code">
+ArrayList&lt;String&gt; nomes = new ArrayList&lt;&gt;();
+nomes.add("Alice");
+nomes.add("Bob");
+nomes.add("Carol");
+    </pre>
+    <li><strong>LinkedList</strong>: Implementado como uma lista encadeada, onde cada elemento contém referências para o próximo e o anterior. Ele é mais eficiente em operações de inserção e remoção (O(1) se no início ou fim), mas o acesso aos elementos por índice é mais lento (O(n)).</li>
+    <pre class="code">
+LinkedList&lt;Integer&gt; numeros = new LinkedList&lt;&gt;();
+numeros.add(10);
+numeros.add(20);
+numeros.add(30);
+    </pre>
+</ul>
+
+<h3>HashSet e TreeSet</h3>
+<p>
+HashSet e TreeSet são implementações da interface Set:
+</p>
+<ul>
+    <li><strong>HashSet</strong>: Armazena elementos em uma tabela hash, proporcionando operações de adição, remoção e busca em tempo constante (O(1)). No entanto, a ordem dos elementos não é garantida.</li>
+    <pre class="code">
+HashSet&lt;String&gt; cores = new HashSet&lt;&gt;();
+cores.add("Vermelho");
+cores.add("Verde");
+cores.add("Azul");
+    </pre>
+    <li><strong>TreeSet</strong>: Mantém os elementos em ordem natural (ou de acordo com um comparador), com operações que têm complexidade O(log n) devido à sua estrutura de árvore.</li>
+    <pre class="code">
+TreeSet&lt;Integer&gt; numerosOrdenados = new TreeSet&lt;&gt;();
+numerosOrdenados.add(50);
+numerosOrdenados.add(30);
+numerosOrdenados.add(70);
+    </pre>
+</ul>
+
+<h3>HashMap e TreeMap</h3>
+<p>
+HashMap e TreeMap são implementações da interface Map:
+</p>
+<ul>
+    <li><strong>HashMap</strong>: Utiliza uma tabela hash, permitindo acesso rápido (O(1)) aos valores por meio das chaves, mas não garante a ordem dos elementos.</li>
+    <pre class="code">
+HashMap&lt;String, Integer&gt; idades = new HashMap&lt;&gt;();
+idades.put("Alice", 25);
+idades.put("Bob", 30);
+idades.put("Carol", 28);
+    </pre>
+    <li><strong>TreeMap</strong>: Mantém os elementos em ordem natural ou de acordo com um comparador, com operações de acesso em O(log n).</li>
+    <pre class="code">
+TreeMap&lt;String, Double&gt; salarios = new TreeMap&lt;&gt;();
+salarios.put("Alice", 1500.0);
+salarios.put("Bob", 2000.0);
+salarios.put("Carol", 1800.0);
+    </pre>
+</ul>
+
+<h2>Iteração e Manipulação de Coleções</h2>
+<p>
+Iterar sobre coleções é essencial para acessar e manipular dados. Em Java, podemos usar diferentes métodos para percorrer coleções, sendo o loop "for-each" uma das abordagens mais comuns:
+</p>
+<pre class="code">
+ArrayList&lt;String&gt; frutas = new ArrayList&lt;&gt;();
+frutas.add("Maçã");
+frutas.add("Banana");
+frutas.add("Laranja");
+
+for (String fruta : frutas) {
+    System.out.println(fruta);
+}
+</pre>
+<p>
+Além da iteração, as coleções oferecem métodos para manipulação, como add, remove e clear:
+</p>
+<pre class="code">
+frutas.remove("Banana"); // Remove a banana
+frutas.clear(); // Limpa todas as frutas
+</pre>
+
+<h2>Ordenação e Comparação</h2>
+<p>
+A ordenação de coleções é importante para organizar elementos. Podemos usar a interface Comparable para definir uma ordem natural ou um Comparator para ordenações personalizadas. O método Collections.sort() é utilizado para ordenar listas:
+</p>
+<pre class="code">
+ArrayList&lt;Integer&gt; numeros = new ArrayList&lt;&gt;();
+numeros.add(30);
+numeros.add(15);
+numeros.add(50);
+Collections.sort(numeros);
+</pre>
+<p>
+Para uma ordenação customizada:
+</p>
+<pre class="code">
+ArrayList&lt;String&gt; nomes = new ArrayList&lt;&gt;();
+nomes.add("Alice");
+nomes.add("Bob");
+nomes.add("Carol");
+Collections.sort(nomes, new OrdenadorPorTamanho());
+</pre>
+
+<h2>Uso de Interfaces</h2>
+<p>
+As interfaces em Java são essenciais para definir contratos que as classes devem seguir. Ao usar interfaces como List, Set e Map, podemos criar um código flexível e facilmente substituível:
+</p>
+<pre class="code">
+void imprimirElementos(Collection&lt;String&gt; colecao) {
+    for (String elemento : colecao) {
+        System.out.println(elemento);
+    }
+}
+</pre>
+
+<h2>Performance e Complexidade</h2>
+<p>
+Compreender a performance e a complexidade das operações em coleções é vital para otimização. Cada operação tem uma complexidade associada:
+</p>
+<ul>
+    <li><strong>O(1)</strong> - Tempo Constante: Exemplo: adicionar elementos em um ArrayList.</li>
+    <li><strong>O(log n)</strong> - Tempo Logarítmico: Exemplo: busca em um TreeSet.</li>
+    <li><strong>O(n)</strong> - Tempo Linear: Exemplo: busca em um ArrayList.</li>
+    <li><strong>O(n log n)</strong> - Tempo Log-Linear: Exemplo: ordenação de elementos.</li>
+</ul>
+<p>
+Um exemplo prático é a operação de adicionar elementos a um ArrayList, que geralmente ocorre em O(1), mas pode ser O(n) em casos de realocação.
+</p>
+
+<h2>Uso de Coleções em Aplicações Reais</h2>
+<p>
+As coleções são utilizadas em diversas aplicações do mundo real, como em sistemas de gerenciamento, onde listas (como ArrayList ou LinkedList) armazenam itens em um carrinho de compras e conjuntos (HashSet ou TreeSet) mantêm dados únicos, como endereços de e-mail.
+</p>
+
+<h2>Coleções Sincronizadas e Não Sincronizadas</h2>
+<p>
+Java oferece coleções sincronizadas e não sincronizadas para manipulação concorrente:
+</p>
+<ul>
+    <li><strong>Sincronizadas</strong>: Garantem acesso seguro entre múltiplas threads, mas podem ser mais lentas.
+    <pre class="code">
+List&lt;String&gt; listaSincronizada = Collections.synchronizedList(new ArrayList&lt;&gt;());
+    </pre>
+    </li>
+    <li><strong>Não Sincronizadas</strong>: Mais eficientes, mas não garantem segurança em operações concorrentes.
+    <pre class="code">
+List&lt;String&gt; listaNaoSincronizada = new ArrayList&lt;&gt;();
+    </pre>
+    </li>
+</ul>
+
+<h2>Manipulação de Elementos Nulos</h2>
+<p>
+Ao trabalhar com coleções, a manipulação de elementos nulos é crucial para evitar erros. Em Java, você pode verificar e tratar elementos nulos:
+</p>
+<pre class="code">
+List&lt;String&gt; nomes = new ArrayList&lt;&gt;();
+nomes.add("Alice");
+nomes.add(null);
+nomes.add("Bob");
+
+for (String nome : nomes) {
+    if (nome != null) {
+        System.out.println(nome);
+    } else {
+        System.out.println("Nome vazio");
+    }
+}
+</pre>
+
+<h2>Uso de Streams e Lambdas com Coleções</h2>
+<p>
+A introdução de streams e lambdas no Java 8 facilitou o processamento de coleções de forma mais concisa e elegante. As streams permitem realizar operações como map, filter e reduce:
+</p>
+<pre class="code">
+List&lt;Integer&gt; numeros = Arrays.asList(1, 2, 3, 4, 5);
+int somaPares = numeros.stream()
+                       .filter(n -&gt; n % 2 == 0)
+                       .mapToInt(Integer::intValue)
+                       .sum();
+System.out.println("Soma dos números pares: " + somaPares);
+</pre>
+
+<h2>Melhores Práticas e Considerações de Design</h2>
+<p>
+Ao utilizar coleções, considere as seguintes práticas:
+</p>
+<ul>
+    <li>Escolha a coleção certa: Decida qual tipo de coleção se adequa melhor ao seu caso de uso.</li>
+    <li>Use interfaces: Opte por interfaces ao invés de implementações concretas para maior flexibilidade.</li>
+    <li>Evite elementos nulos: Reduza a ocorrência de nulos para evitar problemas.</li>
+    <li>Utilize streams e lambdas: Para um código mais legível e funcional.</li>
+    <li>Considere coleções imutáveis: Quando os dados não devem ser alterados após a criação.</li>
+</ul>
+
+<h2>Exercícios</h2>
+<div class="question">
+    <p>1. Qual é o principal objetivo das coleções em Java?</p>
+    <input type="checkbox" id="q1a" onclick="checkAnswer(1, false)"> a) Armazenar apenas números inteiros.<br>
+    <input type="checkbox" id="q1b" onclick="checkAnswer(1, false)"> b) Facilitar a impressão de mensagens no console.<br>
+    <input type="checkbox" id="q1c" onclick="checkAnswer(1, true)"> c) Armazenar e manipular conjuntos de elementos de dados.<br>
+    <input type="checkbox" id="q1d" onclick="checkAnswer(1, false)"> d) Aumentar a complexidade do código.<br>
+    <div class="result" id="result1"></div>
+</div>
+
+<div class="question">
+    <p>2. Qual é a diferença fundamental entre uma List e um Set em Java?</p>
+    <input type="checkbox" id="q2a" onclick="checkAnswer(2, true)"> a) List permite elementos duplicados, enquanto Set não.<br>
+    <input type="checkbox" id="q2b" onclick="checkAnswer(2, false)"> b) List só permite tipos numéricos, enquanto Set permite qualquer tipo.<br>
+    <input type="checkbox" id="q2c" onclick="checkAnswer(2, false)"> c) List não permite elementos nulos, enquanto Set permite.<br>
+    <input type="checkbox" id="q2d" onclick="checkAnswer(2, false)"> d) Não há diferença entre List e Set.<br>
+    <div class="result" id="result2"></div>
+</div>
+
+<div class="question">
+    <p>3. Quais são os exemplos de coleções do tipo Set em Java?</p>
+    <input type="checkbox" id="q3a" onclick="checkAnswer(3, false)"> a) ArrayList e LinkedList.<br>
+    <input type="checkbox" id="q3b" onclick="checkAnswer(3, true)"> b) HashSet e TreeSet.<br>
+    <input type="checkbox" id="q3c" onclick="checkAnswer(3, false)"> c) HashMap e TreeMap.<br>
+    <input type="checkbox" id="q3d" onclick="checkAnswer(3, false)"> d) Queue e Stack.<br>
+    <div class="result" id="result3"></div>
+</div>
+
+<div class="question">
+    <p>4. Qual das seguintes afirmações sobre HashMap em Java é verdadeira?</p>
+    <input type="checkbox" id="q4a" onclick="checkAnswer(4, false)"> a) HashMap mantém a ordem de inserção dos elementos.<br>
+    <input type="checkbox" id="q4b" onclick="checkAnswer(4, false)"> b) HashMap garante que os elementos sejam únicos.<br>
+    <input type="checkbox" id="q4c" onclick="checkAnswer(4, false)"> c) HashMap armazena os elementos em ordem alfabética.<br>
+    <input type="checkbox" id="q4d" onclick="checkAnswer(4, true)"> d) HashMap permite armazenar valores e chaves nulas.<br>
+    <div class="result" id="result4"></div>
+</div>
+
+<div class="question">
+    <p>5. Qual das seguintes interfaces é utilizada para definir coleções que mantêm uma relação de chave-valor?</p>
+    <input type="checkbox" id="q5a" onclick="checkAnswer(5, false)"> a) List.<br>
+    <input type="checkbox" id="q5b" onclick="checkAnswer(5, false)"> b) Set.<br>
+    <input type="checkbox" id="q5c" onclick="checkAnswer(5, true)"> c) Map.<br>
+    <input type="checkbox" id="q5d" onclick="checkAnswer(5, false)"> d) Collection.<br>
+    <div class="result" id="result5"></div>
+</div>
+
+<div class="question">
+    <p>6. Qual é a principal diferença entre um ArrayList e um LinkedList em termos de desempenho?</p>
+    <input type="checkbox" id="q6a" onclick="checkAnswer(6, false)"> a) ArrayList é mais rápido para adicionar elementos.<br>
+    <input type="checkbox" id="q6b" onclick="checkAnswer(6, true)"> b) LinkedList é mais rápido para acessar elementos.<br>
+    <input type="checkbox" id="q6c" onclick="checkAnswer(6, false)"> c) Não há diferença de desempenho entre eles.<br>
+    <input type="checkbox" id="q6d" onclick="checkAnswer(6, false)"> d) ArrayList e LinkedList têm desempenho idêntico.<br>
+    <div class="result" id="result6"></div>
+</div>
+
+<div class="question">
+    <p>7. O que é uma iteração (ou loop) em uma coleção Java?</p>
+    <input type="checkbox" id="q7a" onclick="checkAnswer(7, false)"> a) Uma operação que remove elementos de uma coleção.<br>
+    <input type="checkbox" id="q7b" onclick="checkAnswer(7, false)"> b) Uma operação que insere elementos em uma coleção.<br>
+    <input type="checkbox" id="q7c" onclick="checkAnswer(7, false)"> c) Uma operação que pesquisa elementos em uma coleção.<br>
+    <input type="checkbox" id="q7d" onclick="checkAnswer(7, true)"> d) Um processo para percorrer e acessar elementos de uma coleção.<br>
+    <div class="result" id="result7"></div>
+</div>
+
+<div class="question">
+    <p>8. Quais são os principais benefícios de usar streams e lambdas ao trabalhar com coleções em Java?</p>
+    <input type="checkbox" id="q8a" onclick="checkAnswer(8, false)"> a) Tornam o código mais complexo.<br>
+    <input type="checkbox" id="q8b" onclick="checkAnswer(8, false)"> b) Facilitam a declaração de variáveis.<br>
+    <input type="checkbox" id="q8c" onclick="checkAnswer(8, true)"> c) Tornam o código mais legível e funcional.<br>
+    <input type="checkbox" id="q8d" onclick="checkAnswer(8, false)"> d) Aumentam a quantidade de memória necessária.<br>
+    <div class="result" id="result8"></div>
+</div>
+
+<div class="question">
+    <p>9. Qual das seguintes afirmações sobre a complexidade de tempo (big O notation) é verdadeira em relação às operações em coleções?</p>
+    <input type="checkbox" id="q9a" onclick="checkAnswer(9, false)"> a) As operações sempre têm complexidade constante O(1).<br>
+    <input type="checkbox" id="q9b" onclick="checkAnswer(9, false)"> b) As operações sempre têm complexidade linear O(n).<br>
+    <input type="checkbox" id="q9c" onclick="checkAnswer(9, false)"> c) A complexidade depende apenas do tamanho da coleção.<br>
+    <input type="checkbox" id="q9d" onclick="checkAnswer(9, true)"> d) A complexidade depende apenas do tipo de dado armazenado.<br>
+    <div class="result" id="result9"></div>
+</div>
+
+<div class="question">
+    <p>10. Quando se deve usar uma LinkedList em vez de um ArrayList?</p>
+    <input type="checkbox" id="q10a" onclick="checkAnswer(10, false)"> a) Quando é necessário acesso rápido por índice.<br>
+    <input type="checkbox" id="q10b" onclick="checkAnswer(10, true)"> b) Quando é necessário adicionar elementos no meio da lista.<br>
+    <input type="checkbox" id="q10c" onclick="checkAnswer(10, false)"> c) Quando é necessário armazenar valores únicos.<br>
+    <input type="checkbox" id="q10d" onclick="checkAnswer(10, false)"> d) Quando é necessário apenas percorrer a lista.<br>
+    <div class="result" id="result10"></div>
+</div>
+
+<p>
+Essa aula foi elaborada para fornecer um entendimento profundo sobre as coleções em Java, suas características e aplicações. Espero que você tenha absorvido os conceitos e esteja preparado para aplicá-los em seus projetos. Se tiver dúvidas ou precisar de mais informações, sinta-se à vontade para perguntar!
+</p>
+</body>
+</html>
