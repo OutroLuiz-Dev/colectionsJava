@@ -243,8 +243,8 @@ Ao utilizar coleções, considere as seguintes práticas:
     <li>Utilize streams e lambdas: Para um código mais legível e funcional.</li>
     <li>Considere coleções imutáveis: Quando os dados não devem ser alterados após a criação.</li>
 </ul>
-
 <h2>Exercícios</h2>
+
 <div class="question">
     <p>1. Qual é o principal objetivo das coleções em Java?</p>
     <input type="checkbox" id="q1a" onclick="checkAnswer(1, false)"> a) Armazenar apenas números inteiros.<br>
@@ -334,6 +334,24 @@ Ao utilizar coleções, considere as seguintes práticas:
     <input type="checkbox" id="q10d" onclick="checkAnswer(10, false)"> d) Quando é necessário apenas percorrer a lista.<br>
     <div class="result" id="result10"></div>
 </div>
+
+<script>
+function checkAnswer(questionNumber, isCorrect) {
+    var resultDiv = document.getElementById("result" + questionNumber);
+    
+    if (isCorrect) {
+        resultDiv.innerHTML = "<span style='color: green;'>Correto</span>";
+    } else {
+        resultDiv.innerHTML = "<span style='color: red;'>Errado</span>";
+    }
+
+    // Desabilita todos os checkboxes da questão após selecionar uma resposta
+    var checkboxes = document.querySelectorAll("#q" + questionNumber + "a, #q" + questionNumber + "b, #q" + questionNumber + "c, #q" + questionNumber + "d");
+    checkboxes.forEach(function(checkbox) {
+        checkbox.disabled = true;
+    });
+}
+</script>
 
 
 </body>
